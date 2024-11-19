@@ -11,8 +11,8 @@ export interface HttpServiceModel {
   remove(id: number): Observable<any>;
 }
 
-export interface HttpResponseModel {
-  data: any[];
+export interface HttpResponseModel<T> {
+  data: T[];
   total: number;
   message: string;
   error: string;
