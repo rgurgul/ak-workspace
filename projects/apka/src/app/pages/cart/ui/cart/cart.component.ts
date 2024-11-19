@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CartService } from '../../services/cart.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   template: `
-    <p>
-      cart works!
-    </p>
+    <div>
+      {{cart$|async|json}}
+    </div>
   `,
   styles: ``
 })
 export class CartComponent {
+
+  cartService = inject(CartService);
+  cart$ = this.cartService.state$;
 
 }

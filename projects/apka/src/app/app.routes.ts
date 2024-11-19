@@ -14,4 +14,11 @@ export const routes: Routes = [
       import('./pages/workers/ui/workers/workers.component')
         .then((e) => e.WorkersComponent)
   },
+
+  {
+    path: 'cart',
+    loadComponent: () =>
+      import('./pages/cart/ui/cart/cart.component')
+        .then((e) => e.CartComponent)
+  },
 ];

@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
 import {
   DataGridRowConfig,
   FieldTypes,
+  GridAction,
 } from '../../../../../../../my-lib/src/lib/types/grid.types';
 import { ItemModel } from '../../../../shared/types/services.types';
+import { CartService } from '../../../cart/services/cart.service';
 
 type Keys = keyof ItemModel;
 
@@ -27,10 +29,18 @@ type Keys = keyof ItemModel;
   styles: ``,
 })
 export class ItemsComponent {
-  actionHandler($event: any) {
-    debugger;
+  actionHandler({ type, payload }: any) {
+    switch (type) {
+      case 'buy':
+        this.cartService.dispatch({ type, payload });
+        break;
+
+      default:
+        break;
+    }
   }
   itemsService = inject(ItemsService);
+  cartService = inject(CartService);
   items$ = this.itemsService.state$;
   configGrid: DataGridRowConfig<Keys>[] = [
     { key: 'title' },
