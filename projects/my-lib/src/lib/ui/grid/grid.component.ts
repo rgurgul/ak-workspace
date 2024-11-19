@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { DataGridRowConfig } from '../../types/grid.types';
 
 @Component({
@@ -10,6 +10,10 @@ import { DataGridRowConfig } from '../../types/grid.types';
   styles: ``,
 })
 export class GridComponent {
+  clickHandler(type: string | undefined, payload: any) {
+    this.action.emit({type,payload})
+  }
   data = input.required<any>();
   config = input.required<DataGridRowConfig<any>[]>();
+  action = output<any>();
 }

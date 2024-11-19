@@ -12,7 +12,13 @@
         <input type="text" />
         } @case ('img') {
         <img [src]="item[col.key]" width="80" alt="" />
-        } @default {
+        }
+        @case ('button') {
+            <button (click)="clickHandler(col.header, item)" class="border p-2 !bg-green-400 rounded-xl">
+                {{col.header}}
+            </button>
+            }
+        @default {
         {{ item[col.key] }}
         } }
       </td>

@@ -31,7 +31,7 @@ export interface AuthDataModel {
   password: string;
 }
 
-export interface ItemModel {
+export type ItemModel = {
   id?: number;
   category: string;
   imgSrc: string;
