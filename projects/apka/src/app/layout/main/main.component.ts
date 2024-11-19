@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
+import { MenuComponent,IMenu } from '../../shared/components/menu/menu.component';
 
 @Component({
   selector: 'app-main',
@@ -22,7 +23,8 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatIconModule,
     AsyncPipe,
-    RouterModule
+    RouterModule,
+    MenuComponent
   ]
 })
 export class MainComponent {
@@ -33,4 +35,12 @@ export class MainComponent {
       map(result => result.matches),
       shareReplay()
     );
+
+   menus:IMenu[] = [
+    {name:'items', path:'/items'},
+    {name:'workers', path:'/workers'},
+    {name:'register', path:'/register'},
+    {name:'cart', path:'/cart'},
+
+   ] 
 }
