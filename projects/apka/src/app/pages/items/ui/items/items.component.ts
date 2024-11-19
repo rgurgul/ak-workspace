@@ -36,7 +36,7 @@ export class ItemsComponent {
     { key: 'title' },
     { key: 'price', type: FieldTypes.INPUT },
     { key: 'imgSrc', type: FieldTypes.IMAGE },
-    { type: FieldTypes.BUTTON, header: 'remove' },
+    { type: FieldTypes.BUTTON, header: 'buy' },
     { type: FieldTypes.BUTTON, header: 'more' },
   ];
   constructor() {

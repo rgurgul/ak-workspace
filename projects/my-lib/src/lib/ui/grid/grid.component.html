@@ -1,24 +1,31 @@
 <p>grid works!!</p>
 
 <table>
-  <thead></thead>
+  <thead>
+    <tr>
+      @for (item of config(); track $index) {
+      <th>{{ item.key || item.header | uppercase }}</th>
+      }
+    </tr>
+  </thead>
   <tbody>
     @for (item of data(); track $index) {
     <tr>
-        <td>{{$index+1}}</td>
+      <td>{{ $index + 1 }}</td>
       @for (col of config(); track $index) {
       <td>
         @switch (col.type) { @case ('input') {
-        <input type="text" />
+        <input type="text" [value]="item[col.key]" class="p-2" />
         } @case ('img') {
         <img [src]="item[col.key]" width="80" alt="" />
-        }
-        @case ('button') {
-            <button (click)="clickHandler(col.header, item)" class="border p-2 !bg-green-400 rounded-xl">
-                {{col.header}}
-            </button>
-            }
-        @default {
+        } @case ('button') {
+        <button
+          (click)="clickHandler(col.header, item)"
+          class="border p-2 !bg-green-400 rounded-xl"
+        >
+          {{ col.header }}
+        </button>
+        } @default {
         {{ item[col.key] }}
         } }
       </td>
