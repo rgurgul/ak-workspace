@@ -1,14 +1,23 @@
 <p>grid works!!</p>
 
 <table>
-    <thead></thead>
-    <tbody>
-        @for (item of data(); track $index) {
-            <tr>
-                @for (col of config(); track $index) {
-                    <td>{{item[col.key]}} {{col.type}}</td>
-                }
-            </tr>
-        }
-    </tbody>
+  <thead></thead>
+  <tbody>
+    @for (item of data(); track $index) {
+    <tr>
+        <td>{{$index+1}}</td>
+      @for (col of config(); track $index) {
+      <td>
+        @switch (col.type) { @case ('input') {
+        <input type="text" />
+        } @case ('img') {
+        <img [src]="item[col.key]" width="80" alt="" />
+        } @default {
+        {{ item[col.key] }}
+        } }
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
 </table>
