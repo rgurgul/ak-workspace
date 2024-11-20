@@ -14,6 +14,8 @@ import {
   IMenu,
 } from '../../shared/components/menu/menu.component';
 import { CartService } from '../../pages/cart/services/cart.service';
+import { SpinnerComponent } from '../../shared/components/spinner/spinner.component';
+import { CoreService } from '../../core/services.service';
 
 @Component({
   selector: 'app-main',
@@ -30,14 +32,18 @@ import { CartService } from '../../pages/cart/services/cart.service';
     RouterModule,
     MenuComponent,
     CommonModule,
+    SpinnerComponent
   ],
 })
 export class MainComponent {
   private breakpointObserver = inject(BreakpointObserver);
   cartService = inject(CartService);
+  coreService = inject(CoreService);
+  loading$:any = this.coreService.select((state)=>state.loading || false)
   cartCount$ = this.cartService.state$.pipe(
     map((items) => items.reduce((acc, item) => acc + item.count, 0))
   );
+
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)

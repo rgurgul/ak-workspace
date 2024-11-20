@@ -33,6 +33,7 @@
       }
       <span class="xyz">apka</span>
        -- cart {{ cartCount$ | async | json }}
+       <app-spinner [loading]="!!(loading$|async)"></app-spinner>
     </mat-toolbar>
     <!-- Add Content Here -->
     <div class="p-5 bg-green-50">
