@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { loadRemoteModule } from "@angular-architects/native-federation";
 
 export const routes: Routes = [
   {
@@ -21,4 +22,10 @@ export const routes: Routes = [
       import('./pages/cart/ui/cart/cart.component')
         .then((e) => e.CartComponent)
   },
+
+  {
+    path: 'auth',
+    loadComponent: () =>
+      loadRemoteModule('auth', './Component').then((c)=>c.AppComponent)
+  }
 ];
