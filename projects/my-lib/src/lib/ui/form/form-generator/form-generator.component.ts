@@ -1,5 +1,6 @@
-import { Component, effect, input, Signal } from '@angular/core';
+import { Component, effect, inject, input, Signal } from '@angular/core';
 import { FieldConfig } from '../../../types/form.types';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'lib-form-generator',
@@ -10,10 +11,16 @@ import { FieldConfig } from '../../../types/form.types';
 })
 export class FormGeneratorComponent  {
   formConfig = input.required();
+  fb = inject(FormBuilder);
+  form = this.fb.group({})
 
   constructor(){
     effect(()=>{
-      console.log(this.formConfig());
+      this.formConfig() && this.createFormModel(this.formConfig());
     })
+  }
+  createFormModel(config:any) {
+    debugger;
+    
   }
 }
