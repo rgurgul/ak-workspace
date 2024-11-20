@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'lib-form-generator',
@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class FormGeneratorComponent {
+
+  formConfig = input.required();
 
 }

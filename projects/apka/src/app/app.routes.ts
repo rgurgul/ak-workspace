@@ -15,6 +15,12 @@ export const routes: Routes = [
       import('./pages/workers/ui/workers/workers.component')
         .then((e) => e.WorkersComponent)
   },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/ui/register/register.component')
+        .then((e) => e.RegisterComponent)
+  },
 
   {
     path: 'cart',
