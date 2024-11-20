@@ -22,7 +22,7 @@ export class Utils {
         );
   }
   static remove(data: any[], itemToDelete: { [key: string]: any }): any[] {
-    const found = data.find((item) => item.id === itemToDelete.id);
+    const found = data.find((item) => item.id === itemToDelete['id']);
     return data.filter((item) => item !== found);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -9,7 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
-import { MenuComponent,IMenu } from '../../shared/components/menu/menu.component';
+import {
+  MenuComponent,
+  IMenu,
+} from '../../shared/components/menu/menu.component';
+import { CartService } from '../../pages/cart/services/cart.service';
 
 @Component({
   selector: 'app-main',
@@ -24,23 +28,28 @@ import { MenuComponent,IMenu } from '../../shared/components/menu/menu.component
     MatIconModule,
     AsyncPipe,
     RouterModule,
-    MenuComponent
-  ]
+    MenuComponent,
+    CommonModule,
+  ],
 })
 export class MainComponent {
   private breakpointObserver = inject(BreakpointObserver);
+  cartService = inject(CartService);
+  cartCount$ = this.cartService.state$.pipe(
+    map((items) => items.reduce((acc, item) => acc + item.count, 0))
+  );
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
+      map((result) => result.matches),
       shareReplay()
     );
 
-   menus:IMenu[] = [
-    {name:'items', path:'/items'},
-    {name:'workers', path:'/workers'},
-    {name:'register', path:'/register'},
-    {name:'cart', path:'/cart'},
-
-   ] 
+  menus: IMenu[] = [
+    { name: 'items', path: '/items' },
+    { name: 'workers', path: '/workers' },
+    { name: 'register', path: '/register' },
+    { name: 'cart', path: '/cart' },
+  ];
 }
